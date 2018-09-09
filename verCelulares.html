@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>GeekURL</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="css/style.css"></script>
+
+</head>
+<body  style="background-color: rgb(213, 204, 187);">
+ 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="Index.html">GeekURL.com</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="Index.html">Inicio</a></li>
+        <li  class="dropdown active">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Celulares
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="verCelulares.html">Ver noticias</a></li>
+                <li data-toggle="modal" data-target="#squarespaceModal"><a href="#">Agregar noticia</a></li>
+            </ul>
+        </li>      
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="Registrarse.html"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+        <li><a href="Acceder.html"><span class="glyphicon glyphicon-log-in"></span> Acceder</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+              <h3 class="modal-title" id="lineModalLabel">Agregar Noticia</h3>
+          </div>
+          <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="titleNew">Titulo</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Titulo Noticia">
+                </div>
+                <div class="form-group">
+                  <label for="descriptionNew">Descripcion</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripción Noticia">
+                </div>
+                <div class="form-group">
+                  <label for="imageNew">Imagen</label>
+                  <input type="file" id="InputImage">
+                  <p class="help-block">Agregar imagen de Noticia.</p>
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Cancelar</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                      <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button">Guardar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+<div class="container">
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="img/iphone-8-iphone-x-5881.jpg">
+      <div class="caption">
+        <h3>IPhone X</h3>
+        <p>...</p>
+        <p>
+          <a href="#" class="btn btn-primary" role="button">Editar</a>
+          <a href="#" class="btn btn-default" role="button">Eliminar</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="img/AndroidPIT-Samsung-Galaxy-S9-0692.jpg">
+      <div class="caption">
+        <h3>Samsung Galaxy S9</h3>
+        <p>...</p>
+        <p>
+          <a href="#" class="btn btn-primary" role="button">Editar</a>
+          <a href="#" class="btn btn-default" role="button">Eliminar</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="img/huawei-p20-pro-hero-promo-4.jpg" style="width:350px; height:198px;">
+      <div class="caption">
+        <h3>Huawei P20 Pro</h3>
+        <p>...</p>
+        <p>
+          <a href="#" class="btn btn-primary" role="button">Editar</a>
+          <a href="#" class="btn btn-default" role="button">Eliminar</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+<footer class="page-footer font-small blue pt-4"></footer>
+<div class="footer-copyright text-center py-3">© 2018 Copyright - URL
+</footer>
+</body>
+</html>

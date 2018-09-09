@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>GeekURL</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript, IPHONE, GEEK,IOS,ANDROID">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/Myscript.js"></script>
+  <script src="css/mystle.css"></script>
+</head>
+<body style="background-color: rgb(213, 204, 187);">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="Index.html">GeekURL.com</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="Index.html">Inicio</a></li>
+        <li  class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Celulares
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="verCelulares.html">Ver noticias</a></li>
+                <li data-toggle="modal" data-target="#squarespaceModal"><a href="#">Agregar noticia</a></li>
+            </ul>
+        </li>      
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+        <li><a><span class="glyphicon glyphicon-log-in"></span> Acceder</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+              <h3 class="modal-title" id="lineModalLabel">Agregar Noticia</h3>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="titleNew">Titulo</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Titulo Noticia">
+              </div>
+              <div class="form-group">
+                <label for="descriptionNew">Descripcion</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripción Noticia">
+              </div>
+              <div class="form-group">
+                <label for="imageNew">Imagen</label>
+                <input type="file" id="InputImage">
+                <p class="help-block">Agregar imagen de Noticia.</p>
+              </div>
+            </form>
+
+        </div>
+          <div class="modal-footer">
+              <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Cancelar</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                      <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button">Guardar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+<div >
+  <img class="img-responsive" src="img/sitio_en_construccion.png" style="width:100%; height:700px;">
+</div>
+<footer class="page-footer font-small blue pt-4"></footer>
+<div class="footer-copyright text-center py-3">© 2018 Copyright - URL</div>
+</footer>
+</div>
+</body>
+</html>
