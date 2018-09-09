@@ -146,6 +146,63 @@
                 </div>
               </div>
       </div>
+      <div class="modal fade" id="EditNew" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                  <h3 class="modal-title" id="lineModalLabel">Editar Noticia</h3>
+              </div>
+              <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="titleNew">Titulo</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Titulo Noticia">
+                    </div>
+                    <div class="form-group">
+                      <label for="descriptionNew">Descripcion</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripción Noticia">
+                    </div>
+                    <div class="form-group">
+                      <label for="imageNew">Imagen</label>
+                      <input type="file" id="InputImage">
+                      <p class="help-block">Agregar imagen de Noticia.</p>
+                    </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                      <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Cancelar</button>
+                      </div>
+                      <div class="btn-group" role="group">
+                          <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button">Guardar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="DeleteNew" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                  <h3 class="modal-title" id="lineModalLabel">Editar Noticia</h3>
+              </div>
+              <div class="modal-footer">
+                  <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                      <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Cancelar</button>
+                      </div>
+                      <div class="btn-group" role="group">
+                          <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" role="button">Eliminar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-4">
@@ -153,10 +210,10 @@
       <img src="img/iphone-8-iphone-x-5881.jpg">
       <div class="caption">
         <h3>IPhone X</h3>
-        <p>...</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus repellendus at, eaque, temporibus quam praesentium culpa iusto dolores minima commodi ut ex. Possimus maiores cumque ab dolorum vitae qui eaque?</p>
         <p>
-          <a href="#" class="btn btn-primary" role="button">Editar</a>
-          <a href="#" class="btn btn-default" role="button">Eliminar</a>
+          <a data-toggle="modal" data-target="#EditNew" class="btn btn-primary" role="button">Editar</a>
+          <a data-toggle="modal" data-target="#DeleteNew"  class="btn btn-default" role="button">Eliminar</a>
         </p>
       </div>
     </div>
@@ -166,10 +223,10 @@
       <img src="img/AndroidPIT-Samsung-Galaxy-S9-0692.jpg">
       <div class="caption">
         <h3>Samsung Galaxy S9</h3>
-        <p>...</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, impedit, iure eligendi possimus similique saepe vel asperiores nobis minus dolores fugit neque reprehenderit sapiente, commodi minima aperiam excepturi sed dicta?</p>
         <p>
-          <a href="#" class="btn btn-primary" role="button">Editar</a>
-          <a href="#" class="btn btn-default" role="button">Eliminar</a>
+          <a data-toggle="modal" data-target="#EditNew" class="btn btn-primary" role="button">Editar</a>
+          <a data-toggle="modal" data-target="#DeleteNew" class="btn btn-default" role="button">Eliminar</a>
         </p>
       </div>
     </div>
@@ -179,10 +236,10 @@
       <img src="img/huawei-p20-pro-hero-promo-4.jpg" style="width:350px; height:198px;">
       <div class="caption">
         <h3>Huawei P20 Pro</h3>
-        <p>...</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quidem repudiandae minus amet voluptatem ad ducimus nihil, expedita commodi provident tempora eaque dolores architecto temporibus adipisci ex quasi doloribus dolor?</p>
         <p>
-          <a href="#" class="btn btn-primary" role="button">Editar</a>
-          <a href="#" class="btn btn-default" role="button">Eliminar</a>
+          <a data-toggle="modal" data-target="#EditNew" class="btn btn-primary" role="button">Editar</a>
+          <a data-toggle="modal" data-target="#DeleteNew" class="btn btn-default" role="button">Eliminar</a>
         </p>
       </div>
     </div>
