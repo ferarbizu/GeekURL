@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import './css/Header.css';
-
+import ModalAdd from './Modals/ModalAdd'
 import { Navbar,Nav, NavItem,MenuItem,NavDropdown} from 'react-bootstrap';
 
 class Header extends Component {
-  render() {
+    constructor(props, context) {
+        super(props, context);  
+        this.state = {
+          lgShow: false
+        };
+      }
+      render() {
+        let lgClose = () => this.setState({ lgShow: false });
     return (
       <div className="Header">      
        <Navbar inverse>
@@ -18,7 +25,7 @@ class Header extends Component {
                 <Nav>
                     <NavDropdown eventKey={1} title="Celulares" id="basic-nav-dropdown">
                     <MenuItem eventKey={1.1}>Ver Noticias</MenuItem>
-                    <MenuItem eventKey={1.2}>Agregar Noticia</MenuItem>
+                    <MenuItem eventKey={1.2} onClick={() => this.setState({ lgShow: true })}>Agregar Noticia</MenuItem>
                     </NavDropdown>
                 </Nav>
                 <Nav pullRight>
@@ -26,6 +33,7 @@ class Header extends Component {
                     <NavItem eventKey={2} href="#"><span class="glyphicon glyphicon-log-in"></span> Acceder</NavItem>
                 </Nav>
                 </Navbar.Collapse>
+                <ModalAdd show={this.state.lgShow} onHide={lgClose} />
             </Navbar>
       </div>
     );
