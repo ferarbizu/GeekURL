@@ -3,6 +3,7 @@ import './css/ModalEdit.css'
 import { Modal,FormGroup,Form,ControlLabel,FormControl,Col} from 'react-bootstrap';
 
 class ModalEdit extends Component {
+  
     render() {
         return (
           <Modal
@@ -20,7 +21,7 @@ class ModalEdit extends Component {
                      Dispositivo
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Nombre Celular" />
+                      <FormControl type="text" placeholder="Nombre Celular" ref="name"/>
                     </Col>
                   </FormGroup>
                   <FormGroup controlId="formHorizontalPantalla">
@@ -28,7 +29,7 @@ class ModalEdit extends Component {
                      Pantalla
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla" />
+                      <FormControl type="text" placeholder="Tamaño Pantalla"  ref="screem"/>
                     </Col>
                   </FormGroup>
 
@@ -37,7 +38,7 @@ class ModalEdit extends Component {
                       Capacidad
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Capacidad" />
+                      <FormControl type="text" placeholder="Capacidad"  ref="mem"/>
                     </Col>
                   </FormGroup>
 
@@ -46,7 +47,7 @@ class ModalEdit extends Component {
                       Bateria
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Bateria" />
+                      <FormControl type="text" placeholder="Bateria"  ref="bat"/>
                     </Col>
                   </FormGroup>
 
@@ -55,7 +56,7 @@ class ModalEdit extends Component {
                       Ram
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Memoria Ram" />
+                      <FormControl type="text" placeholder="Memoria Ram"  ref="ram"/>
                     </Col>
                   </FormGroup>
                   </Form>
@@ -67,7 +68,7 @@ class ModalEdit extends Component {
                     </div>
                     
                     <div class="btn-group" role="group">
-                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button">Guardar</button>
+                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" role="button">Guardar</button>
                     </div>
                   </div>
             </Modal.Footer>

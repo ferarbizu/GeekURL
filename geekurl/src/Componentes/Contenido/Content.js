@@ -2,45 +2,57 @@ import React, { Component } from 'react';
 import './css/Content.css';
 import ModalEdit from './Modals/ModalEdit'
 import ModalDelete from './Modals/ModalDelete'
-import { Button,Col,Row, Grid,Thumbnail,FormGroup,Form,ControlLabel,FormControl} from 'react-bootstrap';
+import { Button, Col, Row, Grid, Thumbnail, FormGroup, Form, ControlLabel, FormControl} from 'react-bootstrap';
 class Content extends Component {
+  componentDidMount(){
+    var temp = [];
+
+    if (typeof localStorage["Cells"] !== "undefined"){
+        temp = JSON.parse(localStorage.getItem("Cells"));
+    }
+    else{
+        localStorage.setItem("Cells", JSON.stringify([
+            {idCell: 1, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"},
+            {idCell: 2, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"},
+            {idCell: 3, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"},
+            {idCell: 4, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"}
+        ]));
+        temp = JSON.parse(localStorage.getItem("Cells"));
+    }
+    this.setState({Cellphones:temp});
+}
+
   constructor(props, context) {
     super(props, context);  
     this.state = {
+      Cellphones: [],
       dlShow: false,
       lgShow: false
     };
-    var cel = {
-      "name": "Iphone X",
-      "panta": 6.1 , 
-      "memo": "64GB y 256GB",
-      "bat": "3000mhA",
-      "ram": "2GB"
-      }
-      var celJSON = JSON.stringify(cel);
-      localStorage.setItem("game", celJSON);
-      }
+    
+    }
 
   render() {
+    
     let lgClose = () => this.setState({ lgShow: false });
     let dlClose = () => this.setState({ dlShow: false });
-    var celJSON = localStorage.getItem("game");
-    var game = JSON.parse(celJSON);
-    console.log(game.name);
+    const CellsList = this.state.Cellphones;
     return (
       <div className="Content">  
-       <Grid>
-          <Row>
-            <Col xs={6} md={4}>
-              <Thumbnail src="">
-                <h3>Iphone X</h3>
+      <Grid>
+      <Row>
+             <Col xs={5}>
+            {CellsList.map((CellsList, idCell) => (
+              <div className="item">
+            <Thumbnail key={CellsList.idCell} id={CellsList.idCell} src="" >
+                <h3>{CellsList.name}</h3>
                 <Form horizontal>
                   <FormGroup controlId="formHorizontalEmail">
                     <Col componentClass={ControlLabel} sm={3}>
                      Pantalla
                     </Col>
                     <Col sm={9}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla" value={game.panta} disabled/>
+                      <FormControl type="text" placeholder="Tamaño Pantalla" value={CellsList.screen} disabled/>
                     </Col>
                   </FormGroup>
 
@@ -49,7 +61,7 @@ class Content extends Component {
                       Capacidad
                     </Col>
                     <Col sm={9}>
-                      <FormControl type="text" placeholder="Capacidad"  value={game.memo} disabled/>
+                      <FormControl type="text" placeholder="Capacidad"  value={CellsList.memo} disabled/>
                     </Col>
                   </FormGroup>
 
@@ -58,7 +70,7 @@ class Content extends Component {
                       Bateria
                     </Col>
                     <Col sm={9}>
-                      <FormControl type="text" placeholder="Bateria"  value={game.bat} disabled/>
+                      <FormControl type="text" placeholder="Bateria"  value={CellsList.bat} disabled/>
                     </Col>
                   </FormGroup>
 
@@ -67,7 +79,7 @@ class Content extends Component {
                       Ram
                     </Col>
                     <Col sm={9}>
-                      <FormControl type="text" placeholder="Memoria Ram"  value={game.ram} disabled/>
+                      <FormControl type="text" placeholder="Memoria Ram"  value={CellsList.ram} disabled/>
                     </Col>
                   </FormGroup>
                   </Form>
@@ -77,106 +89,13 @@ class Content extends Component {
                   <Button bsStyle="default" onClick={() => this.setState({ dlShow: true })}>Eliminar</Button>
                  </p>                
               </Thumbnail>
-            </Col>
-            <Col xs={6} md={4}>
-              <Thumbnail src="">
-                <h3>Huawei P20</h3>
-                <Form horizontal>
-                  <FormGroup controlId="formHorizontalEmail">
-                    <Col componentClass={ControlLabel} sm={3}>
-                     Pantalla
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla" disabled/>
-                    </Col>
-                  </FormGroup>
-
-                  <FormGroup controlId="formHorizontalPassword">
-                    <Col componentClass={ControlLabel} sm={3}>
-                      Capacidad
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Capacidad" disabled/>
-                    </Col>
-                  </FormGroup>
-
-                   <FormGroup controlId="formHorizontalPassword">
-                    <Col componentClass={ControlLabel} sm={3}>
-                      Bateria
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Bateria" disabled/>
-                    </Col>
-                  </FormGroup>
-
-                   <FormGroup controlId="formHorizontalRam">
-                    <Col componentClass={ControlLabel} sm={3}>
-                      Ram
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Memoria Ram" disabled/>
-                    </Col>
-                  </FormGroup>
-                  </Form>
-                <p>
-                  <Button bsStyle="primary"  onClick={() => this.setState({ lgShow: true })}>Editar</Button>
-                  &nbsp;
-                  <Button bsStyle="default" onClick={() => this.setState({ dlShow: true })}>Eliminar</Button>
-                </p>
-              </Thumbnail>
-            </Col>
-            <Col xs={6} md={4}>
-              <Thumbnail src="">
-                <h3>Samsung Galaxy S9</h3>
-                <Form horizontal>
-                  <FormGroup controlId="formHorizontalEmail">
-                    <Col componentClass={ControlLabel} sm={3}>
-                     Pantalla
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla" disabled/>
-                    </Col>
-                  </FormGroup>
-
-                  <FormGroup controlId="formHorizontalPassword">
-                    <Col componentClass={ControlLabel} sm={3}>
-                      Capacidad
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Capacidad" disabled/>
-                    </Col>
-                  </FormGroup>
-
-                   <FormGroup controlId="formHorizontalPassword">
-                    <Col componentClass={ControlLabel} sm={3}>
-                      Bateria
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Bateria" disabled/>
-                    </Col>
-                  </FormGroup>
-
-                   <FormGroup controlId="formHorizontalRam">
-                    <Col componentClass={ControlLabel} sm={3}>
-                      Ram
-                    </Col>
-                    <Col sm={9}>
-                      <FormControl type="text" placeholder="Memoria Ram" disabled/>
-                    </Col>
-                  </FormGroup>
-                  </Form>
-                <p>
-                  <Button bsStyle="primary" onClick={() => this.setState({ lgShow: true })}>Editar</Button>
-                  &nbsp;
-                  <Button bsStyle="default" onClick={() => this.setState({ dlShow: true })}>Eliminar</Button>
-                </p>
-              </Thumbnail>
-            </Col>
-          </Row>
+              </div>))}
+              </Col>
+              </Row>
           <ModalEdit show={this.state.lgShow} onHide={lgClose} />
-          <ModalDelete show={this.state.dlShow} onHide={dlClose} />
-        </Grid>;
-      </div>
+          <ModalDelete show={this.state.dlShow} onHide={dlClose} /> 
+          </Grid>       
+          </div>
     );
   }
 }
