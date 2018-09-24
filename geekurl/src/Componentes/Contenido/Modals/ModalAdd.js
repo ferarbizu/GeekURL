@@ -3,9 +3,46 @@ import './css/ModalAdd.css'
 import { Modal,FormGroup,Form,ControlLabel,FormControl,Col} from 'react-bootstrap';
 
 class ModalAdd extends Component {
+
+  onChange(e){
+    this.setState({[e.target.id]: e.target.value});
+  }
+  AddList(e){
+    e.preventDefault();
+    var name = this.state.name;
+    var screen = this.state.screen;
+    var memo = this.state.mem;
+    var bat = this.state.bat;
+    var ram = this.state.ram;
+
+    var cel = {
+      idCell: new Date().getTime(),
+      name:name,
+      screen:screen,
+      memo:memo,
+      bat:bat,
+      ram:ram
+    }
+    
+    var Cellphones = localStorage.getItem('Cells');
+
+    if (Cellphones === null) {
+      Cellphones = [];
+    }
+    else {
+      Cellphones = JSON.parse(Cellphones);
+    }
+    Cellphones.unshift(cel);
+
+    Cellphones = JSON.stringify(Cellphones);
+
+    localStorage.setItem('Cells', Cellphones);
+
+
+    }
     render() {
         return (
-          <Modal
+          <Modal id="addModal"
             {...this.props}
             bsSize="large"
             aria-labelledby="contained-modal-title-lg"
@@ -20,7 +57,7 @@ class ModalAdd extends Component {
                      Dispositivo
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Nombre Celular" />
+                      <FormControl type="text" placeholder="Nombre Celular" id="name" onChange={(e) => this.onChange(e)} />
                     </Col>
                   </FormGroup>
                   <FormGroup controlId="formHorizontalPantalla">
@@ -28,7 +65,7 @@ class ModalAdd extends Component {
                      Pantalla
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla" />
+                      <FormControl type="text" placeholder="Tamaño Pantalla" id="screen" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
@@ -37,7 +74,7 @@ class ModalAdd extends Component {
                       Capacidad
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Capacidad" />
+                      <FormControl type="text" placeholder="Capacidad"  id="mem" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
@@ -46,7 +83,7 @@ class ModalAdd extends Component {
                       Bateria
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Bateria" />
+                      <FormControl type="text" placeholder="Bateria"  id="bat" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
@@ -55,7 +92,7 @@ class ModalAdd extends Component {
                       Ram
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Memoria Ram" />
+                      <FormControl type="text" placeholder="Memoria Ram"  id="ram" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
                   </Form>
@@ -67,7 +104,7 @@ class ModalAdd extends Component {
                     </div>
                     
                     <div class="btn-group" role="group">
-                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button">Guardar</button>
+                        <button type="submit" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button" onClick={(e) => this.AddList(e)} >Guardar</button>
                     </div>
                   </div>
             </Modal.Footer>

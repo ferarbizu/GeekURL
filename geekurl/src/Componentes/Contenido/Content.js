@@ -4,6 +4,7 @@ import ModalEdit from './Modals/ModalEdit'
 import ModalDelete from './Modals/ModalDelete'
 import { Button, Col, Row, Grid, Thumbnail, FormGroup, Form, ControlLabel, FormControl} from 'react-bootstrap';
 class Content extends Component {
+ 
   componentDidMount(){
     var temp = [];
 
@@ -11,17 +12,13 @@ class Content extends Component {
         temp = JSON.parse(localStorage.getItem("Cells"));
     }
     else{
-        localStorage.setItem("Cells", JSON.stringify([
-            {idCell: 1, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"},
-            {idCell: 2, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"},
-            {idCell: 3, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"},
-            {idCell: 4, name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"}
-        ]));
+      localStorage.setItem("Cells", JSON.stringify([
+        {idCell: new Date().getTime(), name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb"}
+    ]));
         temp = JSON.parse(localStorage.getItem("Cells"));
     }
     this.setState({Cellphones:temp});
 }
-
   constructor(props, context) {
     super(props, context);  
     this.state = {
@@ -31,7 +28,14 @@ class Content extends Component {
     };
     
     }
-
+    
+  deleteHandler(id){
+    this.setState(state => {
+      // state.listdata - array of initial values,
+      state.CellsList.splice(id, 1);
+      return {CellsList: state.CellsList}; // returns a new state
+    });
+  }
   render() {
     
     let lgClose = () => this.setState({ lgShow: false });
@@ -43,7 +47,6 @@ class Content extends Component {
       <Row>
              <Col xs={5}>
             {CellsList.map((CellsList, idCell) => (
-              <div className="item">
             <Thumbnail key={CellsList.idCell} id={CellsList.idCell} src="" >
                 <h3>{CellsList.name}</h3>
                 <Form horizontal>
@@ -86,10 +89,9 @@ class Content extends Component {
                   <p>
                   <Button bsStyle="primary" onClick={() => this.setState({ lgShow: true })}>Editar</Button>
                   &nbsp;
-                  <Button bsStyle="default" onClick={() => this.setState({ dlShow: true })}>Eliminar</Button>
+                  <Button bsStyle="default" onClick={() =>this.deleteHandler(CellsList.idCell)}>Eliminar</Button>
                  </p>                
-              </Thumbnail>
-              </div>))}
+              </Thumbnail>))}
               </Col>
               </Row>
           <ModalEdit show={this.state.lgShow} onHide={lgClose} />
