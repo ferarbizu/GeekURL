@@ -30,6 +30,39 @@ class ModalEdit extends Component {
       this.setState({[e.target.id]: e.target.value});
     }
 
+    EditItem(e){
+      e.preventDefault();
+      var name = this.state.name;
+      var screen = this.state.screen;
+      var memo = this.state.mem;
+      var bat = this.state.bat;
+      var ram = this.state.ram;
+  
+      var cel = {
+        idCell: new Date().getTime(),
+        name:name,
+        screen:screen,
+        memo:memo,
+        bat:bat,
+        ram:ram
+      }
+      
+      var Cellphones = localStorage.getItem('Cells');
+  
+      if (Cellphones === null) {
+        Cellphones = [];
+      }
+      else {
+        Cellphones = JSON.parse(Cellphones);
+      }
+      Cellphones.unshift(cel);
+  
+      Cellphones = JSON.stringify(Cellphones);
+  
+      localStorage.setItem('Cells', Cellphones);
+  
+  
+    }
     render() {
         return (
           <Modal
@@ -47,7 +80,7 @@ class ModalEdit extends Component {
                      Dispositivo
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Nombre Celular" value={this.state.name} ref="name"/>
+                      <FormControl type="text" placeholder="Nombre Celular" value={this.state.name} id="name" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
                   <FormGroup controlId="formHorizontalPantalla">
@@ -55,7 +88,7 @@ class ModalEdit extends Component {
                      Pantalla
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla" value={this.state.screen} ref="screen"/>
+                      <FormControl type="text" placeholder="Tamaño Pantalla" value={this.state.screen} id="screen" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
@@ -64,7 +97,7 @@ class ModalEdit extends Component {
                       Capacidad
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Capacidad" value={this.state.memo} ref="mem"/>
+                      <FormControl type="text" placeholder="Capacidad" value={this.state.memo} id="mem" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
@@ -73,7 +106,7 @@ class ModalEdit extends Component {
                       Bateria
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Bateria" value={this.state.bat} ref="bat"/>
+                      <FormControl type="text" placeholder="Bateria" value={this.state.bat} id="bat" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
@@ -82,7 +115,7 @@ class ModalEdit extends Component {
                       Ram
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Memoria Ram" value={this.state.ram}  ref="ram"/>
+                      <FormControl type="text" placeholder="Memoria Ram" value={this.state.ram} id="ram" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
                   </Form>
