@@ -24,11 +24,17 @@ class Content extends Component {
     this.state = {
       Cellphones: [],
       dlShow: false,
-      lgShow: false
+      lgShow: false,
+      idCell: 0,
+      name: '',
+      screen : '',
+      memo : '',
+      bat : '',
+      ram : '',
     };
     
     }
-    
+
   deleteHandler(e,id){
         var localStorageContent = [];
         var NewLocalStorage = [];
@@ -53,11 +59,21 @@ class Content extends Component {
         e.preventDefault();
       }
 
+   editHandler(index,name,screen,memo,bat,ram){
+    this.setState({ lgShow: true }) 
+    this.setState({ idCell: index });
+    this.setState({ name: name });
+    this.setState({ screen: screen });
+    this.setState({ memo: memo });
+    this.setState({ bat: bat });
+    this.setState({ ram: ram });
+   }
   render() {
-    
     let lgClose = () => this.setState({ lgShow: false });
     let dlClose = () => this.setState({ dlShow: false });
     const CellsList = this.state.Cellphones;
+    const requiredItem = this.state.idCell;
+    let modalData = CellsList[requiredItem];
     return (
       <div className="Content">  
       <Grid>
@@ -99,19 +115,28 @@ class Content extends Component {
                       Ram
                     </Col>
                     <Col sm={9}>
-                      <FormControl type="text" placeholder="Memoria Ram"  value={CellsList.ram} disabled/>
+                      <FormControl type="text" placeholder="Memoria Ram"  value={CellsList.bat} disabled/>
                     </Col>
                   </FormGroup>
                   </Form>
                   <p>
-                  <Button bsStyle="primary" onClick={() => this.setState({ lgShow: true })}>Editar</Button>
+                  <Button bsStyle="primary" onClick={() => this.editHandler(CellsList.idCell, CellsList.name, CellsList.screen,
+                    CellsList.memo, CellsList.bat,CellsList.bat)}>Editar</Button>
                   &nbsp;
                   <Button bsStyle="default" onClick={(e) =>this.deleteHandler(e,CellsList.idCell)}>Eliminar</Button>
                  </p>                
               </Thumbnail>))}
               </Col>
               </Row>
-          <ModalEdit show={this.state.lgShow} onHide={lgClose} />
+          <ModalEdit 
+          idCell={this.state.idCell}
+          name={this.state.name} 
+          screen={this.state.screen}
+          memo={this.state.memo}
+          bat={this.state.bat}
+          ram={this.state.ram} 
+          show={this.state.lgShow} 
+          onHide={lgClose} />
           <ModalDelete show={this.state.dlShow} onHide={dlClose} /> 
           </Grid>       
           </div>

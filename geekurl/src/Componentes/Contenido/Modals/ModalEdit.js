@@ -4,6 +4,32 @@ import { Modal,FormGroup,Form,ControlLabel,FormControl,Col} from 'react-bootstra
 
 class ModalEdit extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = {
+        id:0,
+        name: '',
+        screen : '',
+        memo : '',
+        bat : '',
+        ram : '',
+    }
+}
+
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        name: nextProps.name,
+        screen: nextProps.screen,
+        memo: nextProps.memo,
+        bat: nextProps.bat,
+        ram: nextProps.ram
+      });
+    }
+
+    onChange(e){
+      this.setState({[e.target.id]: e.target.value});
+    }
+
     render() {
         return (
           <Modal
@@ -21,7 +47,7 @@ class ModalEdit extends Component {
                      Dispositivo
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Nombre Celular" ref="name"/>
+                      <FormControl type="text" placeholder="Nombre Celular" value={this.state.name} ref="name"/>
                     </Col>
                   </FormGroup>
                   <FormGroup controlId="formHorizontalPantalla">
@@ -29,7 +55,7 @@ class ModalEdit extends Component {
                      Pantalla
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Tamaño Pantalla"  ref="screem"/>
+                      <FormControl type="text" placeholder="Tamaño Pantalla" value={this.state.screen} ref="screen"/>
                     </Col>
                   </FormGroup>
 
@@ -38,7 +64,7 @@ class ModalEdit extends Component {
                       Capacidad
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Capacidad"  ref="mem"/>
+                      <FormControl type="text" placeholder="Capacidad" value={this.state.memo} ref="mem"/>
                     </Col>
                   </FormGroup>
 
@@ -47,7 +73,7 @@ class ModalEdit extends Component {
                       Bateria
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Bateria"  ref="bat"/>
+                      <FormControl type="text" placeholder="Bateria" value={this.state.bat} ref="bat"/>
                     </Col>
                   </FormGroup>
 
@@ -56,7 +82,7 @@ class ModalEdit extends Component {
                       Ram
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Memoria Ram"  ref="ram"/>
+                      <FormControl type="text" placeholder="Memoria Ram" value={this.state.ram}  ref="ram"/>
                     </Col>
                   </FormGroup>
                   </Form>
