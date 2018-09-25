@@ -29,13 +29,30 @@ class Content extends Component {
     
     }
     
-  deleteHandler(id){
-    this.setState(state => {
-      // state.listdata - array of initial values,
-      state.CellsList.splice(id, 1);
-      return {CellsList: state.CellsList}; // returns a new state
-    });
-  }
+  deleteHandler(e,id){
+        var localStorageContent = [];
+        var NewLocalStorage = [];
+        var Cellphone = [];
+        localStorageContent = JSON.parse(localStorage.getItem("Cells"));
+        for(var i = 0; i < localStorageContent.length; i++){
+            if(localStorageContent[i].idCell !== id){
+              NewLocalStorage.push(localStorageContent[i]);
+            }
+        }
+
+        NewLocalStorage = JSON.stringify(NewLocalStorage);
+        localStorage.setItem('Cells', NewLocalStorage);
+        Cellphone = JSON.parse(localStorage.getItem("Cells"));
+
+        if(Cellphone.length === 0){
+            alert('No hay telefonos para eliminar');
+        }
+        else{
+            this.setState({ Cellphones: Cellphone });
+        }
+        e.preventDefault();
+      }
+
   render() {
     
     let lgClose = () => this.setState({ lgShow: false });
@@ -89,7 +106,7 @@ class Content extends Component {
                   <p>
                   <Button bsStyle="primary" onClick={() => this.setState({ lgShow: true })}>Editar</Button>
                   &nbsp;
-                  <Button bsStyle="default" onClick={() =>this.deleteHandler(CellsList.idCell)}>Eliminar</Button>
+                  <Button bsStyle="default" onClick={(e) =>this.deleteHandler(e,CellsList.idCell)}>Eliminar</Button>
                  </p>                
               </Thumbnail>))}
               </Col>
