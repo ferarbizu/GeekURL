@@ -42,7 +42,7 @@ class Content extends Component {
         localStorageContent = JSON.parse(localStorage.getItem("Cells"));
         for(var i = 0; i < localStorageContent.length; i++){
             if(localStorageContent[i].idCell !== id){
-              NewLocalStorage.push(localStorageContent[i]);
+              NewLocalStorage.unshift(localStorageContent[i]);
             }
         }
 
@@ -59,9 +59,9 @@ class Content extends Component {
         e.preventDefault();
       }
 
-   editHandler(index,name,screen,memo,bat,ram){
+   editHandler(idCell,name,screen,memo,bat,ram){
     this.setState({ lgShow: true }) 
-    this.setState({ idCell: index });
+    this.setState({ idCell: idCell });
     this.setState({ name: name });
     this.setState({ screen: screen });
     this.setState({ memo: memo });
@@ -115,13 +115,13 @@ class Content extends Component {
                       Ram
                     </Col>
                     <Col sm={9}>
-                      <FormControl type="text" placeholder="Memoria Ram"  value={CellsList.bat} disabled/>
+                      <FormControl type="text" placeholder="Memoria Ram"  value={CellsList.ram} disabled/>
                     </Col>
                   </FormGroup>
                   </Form>
                   <p>
                   <Button bsStyle="primary" onClick={() => this.editHandler(CellsList.idCell, CellsList.name, CellsList.screen,
-                    CellsList.memo, CellsList.bat,CellsList.bat)}>Editar</Button>
+                    CellsList.memo, CellsList.bat,CellsList.ram)}>Editar</Button>
                   &nbsp;
                   <Button bsStyle="default" onClick={(e) =>this.deleteHandler(e,CellsList.idCell)}>Eliminar</Button>
                  </p>                

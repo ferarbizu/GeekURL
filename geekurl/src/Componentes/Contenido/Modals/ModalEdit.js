@@ -7,7 +7,7 @@ class ModalEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        id:0,
+       idCell:0,
         name: '',
         screen : '',
         memo : '',
@@ -18,6 +18,7 @@ class ModalEdit extends Component {
 
     componentWillReceiveProps(nextProps) {
       this.setState({
+       idCell:nextProps.idCell,
         name: nextProps.name,
         screen: nextProps.screen,
         memo: nextProps.memo,
@@ -30,38 +31,39 @@ class ModalEdit extends Component {
       this.setState({[e.target.id]: e.target.value});
     }
 
-    EditItem(e){
+    EditItem(e, idCell){
+      debugger;
       e.preventDefault();
+      var id = idCell;
       var name = this.state.name;
       var screen = this.state.screen;
-      var memo = this.state.mem;
+      var memo = this.state.memo;
       var bat = this.state.bat;
       var ram = this.state.ram;
   
       var cel = {
-        idCell: new Date().getTime(),
+        idCell: id,
         name:name,
         screen:screen,
         memo:memo,
         bat:bat,
         ram:ram
       }
-      
-      var Cellphones = localStorage.getItem('Cells');
-  
-      if (Cellphones === null) {
-        Cellphones = [];
-      }
-      else {
-        Cellphones = JSON.parse(Cellphones);
-      }
-      Cellphones.unshift(cel);
-  
-      Cellphones = JSON.stringify(Cellphones);
-  
-      localStorage.setItem('Cells', Cellphones);
-  
-  
+      var localStorageContent = [];
+      var NewLocalStorage = [];
+      var Cellphone = [];
+      localStorageContent = JSON.parse(localStorage.getItem("Cells"));
+      for(var i = 0; i < localStorageContent.length; i++){
+          if(localStorageContent[i].idCell === id){
+             localStorageContent[i] = cel;
+          }
+          NewLocalStorage.push(localStorageContent[i]);
+      }  
+      NewLocalStorage = JSON.stringify(NewLocalStorage);
+      localStorage.setItem('Cells', NewLocalStorage);
+      Cellphone = JSON.parse(localStorage.getItem("Cells"));
+   
+      e.preventDefault();
     }
     render() {
         return (
@@ -71,7 +73,7 @@ class ModalEdit extends Component {
             aria-labelledby="contained-modal-title-lg"
           >
             <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-lg">Editar Celular</Modal.Title>
+              <Modal.Title id="contained-modal-title-lg">Editar Celular </Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <Form horizontal>
@@ -127,7 +129,7 @@ class ModalEdit extends Component {
                     </div>
                     
                     <div class="btn-group" role="group">
-                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" role="button">Guardar</button>
+                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" role="button" onClick={(e) => this.EditItem(e,this.state.idCell)} >Guardar</button>
                     </div>
                   </div>
             </Modal.Footer>
