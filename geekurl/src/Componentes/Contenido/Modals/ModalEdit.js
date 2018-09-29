@@ -6,6 +6,7 @@ class ModalEdit extends Component {
   
   constructor(props) {
     super(props);
+    this.handleSave = this.handleSave.bind(this);
     this.state = {
        idCell:0,
         name: '',
@@ -13,17 +14,20 @@ class ModalEdit extends Component {
         memo : '',
         bat : '',
         ram : '',
+        img : ''
     }
 }
 
     componentWillReceiveProps(nextProps) {
+      debugger;
       this.setState({
-       idCell:nextProps.idCell,
+        idCell: nextProps.idCell,
         name: nextProps.name,
         screen: nextProps.screen,
         memo: nextProps.memo,
         bat: nextProps.bat,
-        ram: nextProps.ram
+        ram: nextProps.ram,
+        img : nextProps.img,
       });
     }
 
@@ -31,43 +35,16 @@ class ModalEdit extends Component {
       this.setState({[e.target.id]: e.target.value});
     }
 
-    EditItem(e, idCell){
-      debugger;
-      e.preventDefault();
-      var id = idCell;
-      var name = this.state.name;
-      var screen = this.state.screen;
-      var memo = this.state.memo;
-      var bat = this.state.bat;
-      var ram = this.state.ram;
-  
-      var cel = {
-        idCell: id,
-        name:name,
-        screen:screen,
-        memo:memo,
-        bat:bat,
-        ram:ram
-      }
-      var localStorageContent = [];
-      var NewLocalStorage = [];
-      var Cellphone = [];
-      localStorageContent = JSON.parse(localStorage.getItem("Cells"));
-      for(var i = 0; i < localStorageContent.length; i++){
-          if(localStorageContent[i].idCell === id){
-             localStorageContent[i] = cel;
-          }
-          NewLocalStorage.push(localStorageContent[i]);
-      }  
-      NewLocalStorage = JSON.stringify(NewLocalStorage);
-      localStorage.setItem('Cells', NewLocalStorage);
-      Cellphone = JSON.parse(localStorage.getItem("Cells"));
-   
-      e.preventDefault();
+    handleSave() {
+      const item = this.state;
+
+      this.props.saveModalDetails(item);
     }
+    
     render() {
+      debugger;
         return (
-          <Modal
+            <Modal
             {...this.props}
             bsSize="large"
             aria-labelledby="contained-modal-title-lg"
@@ -120,6 +97,14 @@ class ModalEdit extends Component {
                       <FormControl type="text" placeholder="Memoria Ram" value={this.state.ram} id="ram" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
+                  <FormGroup controlId="formHorizontalRam">
+                    <Col componentClass={ControlLabel} sm={2}>
+                      Imagen Link
+                    </Col>
+                    <Col sm={10}>
+                      <FormControl type="text" placeholder="Imagen link" value={this.state.img} id="img" onChange={(e) => this.onChange(e)}/>
+                    </Col>
+                  </FormGroup>
                   </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -129,7 +114,7 @@ class ModalEdit extends Component {
                     </div>
                     
                     <div class="btn-group" role="group">
-                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" role="button" onClick={(e) => this.EditItem(e,this.state.idCell)} >Guardar</button>
+                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" role="button" onClick={() => { this.handleSave() }} >Guardar</button>
                     </div>
                   </div>
             </Modal.Footer>

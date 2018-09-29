@@ -23,10 +23,7 @@ class Header extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                 <Nav>
-                    <NavDropdown eventKey={1} title="Celulares" id="basic-nav-dropdown">
-                    <MenuItem eventKey={1.1}>Ver Noticias</MenuItem>
-                    <MenuItem eventKey={1.2} onClick={() => this.setState({ lgShow: true })}>Agregar Noticia</MenuItem>
-                    </NavDropdown>
+                <NavItem eventKey={1} href="#"><span class=""></span>Celulares</NavItem>
                 </Nav>
                 <Nav pullRight>
                     <NavItem eventKey={1} href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</NavItem>

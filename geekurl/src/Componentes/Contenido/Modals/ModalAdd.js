@@ -3,42 +3,41 @@ import './css/ModalAdd.css'
 import { Modal,FormGroup,Form,ControlLabel,FormControl,Col} from 'react-bootstrap';
 
 class ModalAdd extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+       idCell:0,
+        name: '',
+        screen : '',
+        memo : '',
+        bat : '',
+        ram : '',
+        img : ''
+    }
+}
 
   onChange(e){
     this.setState({[e.target.id]: e.target.value});
   }
-  AddList(e){
-    e.preventDefault();
+  AddList(){
+    debugger;
     var name = this.state.name;
     var screen = this.state.screen;
     var memo = this.state.mem;
     var bat = this.state.bat;
     var ram = this.state.ram;
-
-    var cel = {
-      idCell: new Date().getTime(),
-      name:name,
-      screen:screen,
-      memo:memo,
-      bat:bat,
-      ram:ram
-    }
-    
-    var Cellphones = localStorage.getItem('Cells');
-
-    if (Cellphones === null) {
-      Cellphones = [];
-    }
-    else {
-      Cellphones = JSON.parse(Cellphones);
-    }
-    Cellphones.unshift(cel);
-
-    Cellphones = JSON.stringify(Cellphones);
-
-    localStorage.setItem('Cells', Cellphones);
-
-
+    var img = this.state.img;
+      var cel = {
+        idCell: new Date().getTime(),
+        name:name,
+        screen:screen,
+        memo:memo,
+        bat:bat,
+        ram:ram,
+        img:img
+      }
+      this.props.saveModalAdd(cel);
     }
     render() {
         return (
@@ -95,6 +94,15 @@ class ModalAdd extends Component {
                       <FormControl type="text" placeholder="Memoria Ram"  id="ram" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
+
+                  <FormGroup controlId="formHorizontalImg">
+                    <Col componentClass={ControlLabel} sm={2}>
+                      Link Imagen
+                    </Col>
+                    <Col sm={10}>
+                      <FormControl type="text" placeholder="Link Imagen"  id="img" onChange={(e) => this.onChange(e)}/>
+                    </Col>
+                  </FormGroup>
                   </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -104,7 +112,7 @@ class ModalAdd extends Component {
                     </div>
                     
                     <div class="btn-group" role="group">
-                        <button type="submit" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button" onClick={(e) => this.AddList(e)} >Guardar</button>
+                        <button type="button" id="saveImage" class="btn btn-primary btn-hover-green" data-action="save" role="button" onClick={() => this.AddList()} >Guardar</button>
                     </div>
                   </div>
             </Modal.Footer>
