@@ -20,6 +20,7 @@ class ModalAdd extends Component {
   onChange(e){
     this.setState({[e.target.id]: e.target.value});
   }
+  
   AddList(){
     debugger;
     var name = this.state.name;

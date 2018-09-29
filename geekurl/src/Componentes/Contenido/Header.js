@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import './css/Header.css';
-import ModalAdd from './Modals/ModalAdd'
-import { Navbar,Nav, NavItem,MenuItem,NavDropdown} from 'react-bootstrap';
+import ModalRegis from './Modals/ModalRegis'
+import ModalAccder from './Modals/ModalAccder'
+import { Navbar,Nav, NavItem} from 'react-bootstrap';
 
 class Header extends Component {
     constructor(props, context) {
         super(props, context);  
         this.state = {
-          lgShow: false
+          lgShow: false,
+          acShow:false
         };
       }
       render() {
         let lgClose = () => this.setState({ lgShow: false });
+        let acClose = () => this.setState({ acShow: false });
     return (
       <div className="Header">      
        <Navbar inverse>
@@ -26,11 +29,12 @@ class Header extends Component {
                 <NavItem eventKey={1} href="#"><span class=""></span>Celulares</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavItem eventKey={1} href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</NavItem>
-                    <NavItem eventKey={2} href="#"><span class="glyphicon glyphicon-log-in"></span> Acceder</NavItem>
+                    <NavItem eventKey={1} onClick={() => this.setState({ lgShow: true })}><span class="glyphicon glyphicon-user"></span> Registrarse</NavItem>
+                    <NavItem eventKey={2} onClick={() => this.setState({ acShow: true })}><span class="glyphicon glyphicon-log-in"></span> Acceder</NavItem>
                 </Nav>
                 </Navbar.Collapse>
-                <ModalAdd show={this.state.lgShow} onHide={lgClose} />
+                <ModalRegis show={this.state.lgShow} onHide={lgClose} />
+                <ModalAccder show={this.state.acShow} onHide={acClose} />
             </Navbar>
       </div>
     );
