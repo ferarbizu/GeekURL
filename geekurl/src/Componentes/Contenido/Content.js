@@ -4,49 +4,43 @@ import ModalEdit from './Modals/ModalEdit'
 import ModalAdd from './Modals/ModalAdd'
 import { Button, Col, Row, Grid, Thumbnail, FormGroup, Form, ControlLabel, FormControl} from 'react-bootstrap';
 class Content extends Component {
- 
-  componentDidMount(){
-    var temp = [];
-
-    if (typeof localStorage["Cells"] !== "undefined"){
-        temp = JSON.parse(localStorage.getItem("Cells"));
-        this.state.requiredItem = 0;
-    }
-    else{
-      localStorage.setItem("Cells", JSON.stringify([
-        {idCell: new Date().getTime(), name: "Iphone Xs Max", screen: "6.3", memo: "64Gb, 256GB y 512GB", bat: "3000", ram:"2Gb",img:"https://cnet4.cbsistatic.com/img/knVcFvL9RVPKDKE9kJqJy5L0gQM=/830x467/2017/10/31/312b3b6e-59b7-499a-aea4-9bc5f9721a21/iphone-x-54.jpg"}
-    ]));
-        temp = JSON.parse(localStorage.getItem("Cells"));
-        this.state.requiredItem = 0;
-    }
-    this.setState({Cellphones:temp});
-}
   constructor(props, context) {
-    super(props, context);  
-    this.replaceModalItem = this.replaceModalItem.bind(this);
-    this.saveModalDetails = this.saveModalDetails.bind(this);
-    this.saveModalAdd = this.saveModalAdd.bind(this);
-    this.state = {
-      Cellphones: [],
-      requiredItem: 0,
-      lgShow: false,
-      adShow: false,
-      idCell: 0,
-      name: '',
-      screen : '',
-      memo : '',
-      bat : '',
-      ram : '',
-      img : ''
-    };
-    
+      super(props, context);  
+      this.replaceModalItem = this.replaceModalItem.bind(this);
+      this.saveModalDetails = this.saveModalDetails.bind(this);
+      this.saveModalAdd = this.saveModalAdd.bind(this);
+      this.state = {
+        Cellphones: [],
+        requiredItem: 0,
+        lgShow: false,
+        adShow: false,
+        _id: 0,
+        name: '',
+        screen : '',
+        memo : '',
+        bat : '',
+        ram : '',
+        img : ''
+      };
     }
-
-    replaceModalItem(index,idCell,name,screen,memo,bat,ram,img) {
-      debugger;
+  async componentDidMount(){
+    debugger;
+    try {
+      const response = await fetch('http://localhost:3001/api/V1/Cell/');
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      const data = await response.json();
+      this.setState({Cellphones:data.cells});
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+    replaceModalItem(index,_id,name,screen,memo,bat,ram,img) {
       this.setState({ lgShow: true });
       this.setState({ requiredItem: index });
-      this.setState({ idCell: idCell });
+      this.setState({ _id: _id });
       this.setState({ name: name });
       this.setState({ screen: screen });
       this.setState({ memo: memo });
@@ -55,32 +49,59 @@ class Content extends Component {
       this.setState({ img: img });
     }
   
-    saveModalDetails(item) {
-      debugger;
-      const requiredItem = this.state.requiredItem;
-      let tempbrochure = JSON.parse(localStorage.getItem("Cells"));
-      tempbrochure[requiredItem] = item;
-      localStorage.setItem('Cells', JSON.stringify(tempbrochure));
-      this.setState({ lgShow: false });
-      this.setState({ Cellphones: tempbrochure });
+    async saveModalDetails(item) {
+      try {
+        const response = await fetch('http://localhost:3001/api/V1/Cell/', {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(item)
+        });
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        this.componentDidMount();
+        this.setState({ lgShow: false });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
-    saveModalAdd(item) {
-      var tempbrochure = [];
-      tempbrochure = JSON.parse(localStorage.getItem("Cells"));
-      tempbrochure.unshift(item);
-      localStorage.setItem('Cells', JSON.stringify(tempbrochure));
-      this.setState({ adShow: false });
-      this.setState({ Cellphones: tempbrochure });
-      alert("Se agrego Exitosamente.");
+    async saveModalAdd(item) {
+        try {
+          const response = await fetch('http://localhost:3001/api/V1/Cell/', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(item)
+        });
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        this.componentDidMount();
+        this.setState({ adShow: false });
+      } catch (error) {
+        console.log(error);
+      }
     }
   
-    deleteItem(index) {
-      debugger;
-      let tempBrochure = JSON.parse(localStorage.getItem("Cells"));;
-    tempBrochure.splice(index, 1);
-        localStorage.setItem('Cells', JSON.stringify(tempBrochure));
-      this.setState({ Cellphones: tempBrochure });
+    async deleteItem(index) {
+      const response = await fetch('http://localhost:3001/api/V1/Cell/', {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id:index})
+      });
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      this.componentDidMount();
     }
 
   render() {
@@ -95,8 +116,8 @@ class Content extends Component {
         <hr />
         <Row>
           <Col>   
-            {CellsList.map((CellsList, idCell) => (
-            <Thumbnail key={idCell} id={idCell}>
+            {CellsList.map((CellsList, _id) => (
+            <Thumbnail key={_id} id={_id}>
                 <h3>{CellsList.name}</h3>
                 
                 <Form horizontal>
@@ -143,17 +164,17 @@ class Content extends Component {
               </Form>
               <div className="Centrar">    
                   <p>
-                  <Button bsStyle="primary" onClick={() => this.replaceModalItem(idCell,CellsList.idCell, CellsList.name, CellsList.screen,
+                  <Button bsStyle="primary" onClick={() => this.replaceModalItem(_id,CellsList._id, CellsList.name, CellsList.screen,
                     CellsList.memo, CellsList.bat,CellsList.ram,CellsList.img)}>Editar</Button>
                   &nbsp;
-                  <Button bsStyle="default" onClick={() => this.deleteItem(idCell)}>Eliminar</Button>
+                  <Button bsStyle="default" onClick={() => this.deleteItem(CellsList._id)}>Eliminar</Button>
                  </p> 
               </div>               
               </Thumbnail>))}
               </Col>
               </Row>
         <ModalEdit 
-          idCell={this.state.idCell}
+          _id={this.state._id}
           name={this.state.name} 
           screen={this.state.screen}
           memo={this.state.memo}

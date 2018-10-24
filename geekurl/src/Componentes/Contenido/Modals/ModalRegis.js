@@ -17,7 +17,6 @@ class ModalRegis extends Component {
   }
   
     render() {
-        debugger;
         return (
           <Modal
             {...this.props}

@@ -25,9 +25,6 @@ class Header extends Component {
                 <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                <Nav>
-                <NavItem eventKey={1} href="#"><span class=""></span>Celulares</NavItem>
-                </Nav>
                 <Nav pullRight>
                     <NavItem eventKey={1} onClick={() => this.setState({ lgShow: true })}><span class="glyphicon glyphicon-user"></span> Registrarse</NavItem>
                     <NavItem eventKey={2} onClick={() => this.setState({ acShow: true })}><span class="glyphicon glyphicon-log-in"></span> Acceder</NavItem>

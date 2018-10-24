@@ -7,7 +7,7 @@ class ModalAdd extends Component {
     super(props);
 
     this.state = {
-       idCell:0,
+       _id:0,
         name: '',
         screen : '',
         memo : '',
@@ -30,7 +30,6 @@ class ModalAdd extends Component {
     var ram = this.state.ram;
     var img = this.state.img;
       var cel = {
-        idCell: new Date().getTime(),
         name:name,
         screen:screen,
         memo:memo,

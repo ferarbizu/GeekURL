@@ -8,7 +8,7 @@ class ModalEdit extends Component {
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
-       idCell:0,
+      _id:0,
         name: '',
         screen : '',
         memo : '',
@@ -19,9 +19,8 @@ class ModalEdit extends Component {
 }
 
     componentWillReceiveProps(nextProps) {
-      debugger;
       this.setState({
-        idCell: nextProps.idCell,
+        _id: nextProps._id,
         name: nextProps.name,
         screen: nextProps.screen,
         memo: nextProps.memo,
@@ -36,13 +35,13 @@ class ModalEdit extends Component {
     }
 
     handleSave() {
+      debugger;
       const item = this.state;
 
       this.props.saveModalDetails(item);
     }
     
     render() {
-      debugger;
         return (
             <Modal
             {...this.props}
@@ -76,7 +75,7 @@ class ModalEdit extends Component {
                       Capacidad
                     </Col>
                     <Col sm={10}>
-                      <FormControl type="text" placeholder="Capacidad" value={this.state.memo} id="mem" onChange={(e) => this.onChange(e)}/>
+                      <FormControl type="text" placeholder="Capacidad" value={this.state.memo} id="memo" onChange={(e) => this.onChange(e)}/>
                     </Col>
                   </FormGroup>
 
