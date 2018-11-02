@@ -24,7 +24,6 @@ class Content extends Component {
       };
     }
   async componentDidMount(){
-    debugger;
     try {
       const response = await fetch('http://localhost:3001/api/V1/Cell/');
       if (!response.ok) {

@@ -22,7 +22,6 @@ class ModalAdd extends Component {
   }
   
   AddList(){
-    debugger;
     var name = this.state.name;
     var screen = this.state.screen;
     var memo = this.state.mem;

@@ -16,7 +16,6 @@ class ModalAccder extends Component {
   }
   
     render() {
-        debugger;
         return (
           <Modal
             {...this.props}
